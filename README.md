@@ -7,4 +7,4 @@ This repository contains **Dockerfile** of [mitmproxy](https://mitmproxy.org) fo
 docker run -it --rm \
     -v ~/.mitmproxy:/root/.mitmproxy \
     -p 8080:8080 \
-    sgrio/mitm mitmproxy
+    sgrio/mitmproxy mitmproxy
