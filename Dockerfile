@@ -1,23 +1,21 @@
-FROM sgrio/alpine-python
+FROM sgrio/ubuntu-python
 MAINTAINER SgrAlpha <admin@mail.sgr.io>
 
 EXPOSE 8080 8081
 
-RUN apk add --no-cache \
-        g++ \
-        libffi \
-        libffi-dev \
-        libstdc++ \
-        openssl \
-        openssl-dev \
+RUN apt-get update && \
+    apt-get install \
+        --no-install-recommends -y \
+        build-essential \
+        libssl-dev \
         python3-dev && \
-    LDFLAGS=-L/lib pip3 install \
+    pip3 install \
         --no-cache-dir \
         mitmproxy && \
-    apk del --purge \
-        g++ \
-        libffi-dev \
-        libstdc++ \
-        openssl-dev \
-        python3-dev
-	
+    apt-get remove --purge -y \
+        build-essential \
+        libssl-dev \
+        python3-dev && \
+    apt-get autoclean && \
+    apt-get autoremove --purge -y && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
