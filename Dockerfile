@@ -9,7 +9,11 @@ RUN apk add --no-cache \
         openssl \
         openssl-dev \
         python3-dev && \
-    pip3 install --no-cache-dir mitmproxy && \
+    pip3 install \
+        --no-cache-dir \
+        --index-url=http://pypi.python.org/simple/ \
+        --trusted-host pypi.python.org \
+        mitmproxy && \
     apk del --purge \
         g++ \
         libstdc++ \
