@@ -5,17 +5,18 @@ EXPOSE 8080 8081
 
 RUN apk add --no-cache \
         g++ \
+        libffi \
+        libffi-dev \
         libstdc++ \
         openssl \
         openssl-dev \
         python3-dev && \
-    pip3 install \
+    LDFLAGS=-L/lib pip3 install \
         --no-cache-dir \
-        --index-url=http://pypi.python.org/simple/ \
-        --trusted-host pypi.python.org \
         mitmproxy && \
     apk del --purge \
         g++ \
+        libffi-dev \
         libstdc++ \
         openssl-dev \
         python3-dev
